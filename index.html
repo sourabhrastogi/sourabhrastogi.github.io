@@ -1,62 +1,820 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Professional Resume</title>
-    <!-- Tailwind CSS for modern, zero-config styling -->
-    <script src="https://jsdelivr.net"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Solution Architect portfolio for Sourabh. Telecom BSS, product catalog architecture, Amdocs CatalogONE, cloud-native microservices and catalog transformation.">
+  <title>Sourabh | Solution Architect &mdash; Telecom BSS &amp; Product Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-soft: #141b24;
+      --surface: rgba(24, 33, 44, 0.78);
+      --surface-strong: rgba(30, 41, 54, 0.96);
+      --text: #e9f1f8;
+      --text-muted: #a3b4c6;
+      --line: rgba(96, 187, 232, 0.2);
+      --line-strong: rgba(96, 187, 232, 0.36);
+      --primary: #58b8e8;
+      --primary-strong: #2f93c9;
+      --accent: #7fe3c4;
+      --shadow: 0 24px 80px rgba(5, 12, 20, 0.55);
+    }
+
+    body[data-theme="light"] {
+      --bg: #f7fafc;
+      --bg-soft: #eaf1f7;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: rgba(255, 255, 255, 0.96);
+      --text: #10202e;
+      --text-muted: #52697e;
+      --line: rgba(31, 111, 158, 0.18);
+      --line-strong: rgba(31, 111, 158, 0.3);
+      --primary: #1f6f9e;
+      --primary-strong: #17567c;
+      --accent: #158f74;
+      --shadow: 0 24px 80px rgba(31, 79, 112, 0.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% -20%, rgba(88, 184, 232, 0.2), transparent 55%),
+        radial-gradient(circle at 92% 8%, rgba(127, 227, 196, 0.14), transparent 45%),
+        var(--bg);
+      line-height: 1.6;
+      transition: background 280ms ease, color 200ms ease;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1120px, 92vw); margin-inline: auto; }
+
+    .bg-orb {
+      position: fixed; border-radius: 50%; filter: blur(80px);
+      opacity: 0.3; pointer-events: none; z-index: -1;
+    }
+    .bg-orb-1 { width: 380px; height: 380px; top: -120px; left: -120px; background: #3f9dd0; }
+    .bg-orb-2 { width: 320px; height: 320px; right: -80px; top: 42%; background: #4fbf9f; }
+
+    .section { padding: 5rem 0; scroll-margin-top: 90px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      transition: background 220ms ease, border-color 220ms ease;
+    }
+    .site-header.scrolled {
+      background: color-mix(in srgb, var(--bg), transparent 22%);
+      border-color: var(--line);
+    }
+
+    .nav-shell {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.38rem 0.76rem 0.38rem 0.4rem;
+      border-radius: 999px; border: 1px solid var(--line);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--surface-strong), transparent 12%), color-mix(in srgb, var(--surface), transparent 2%));
+      box-shadow: 0 8px 26px rgba(47, 147, 201, 0.14);
+      text-decoration: none;
+      transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+    .brand:hover {
+      border-color: var(--line-strong); transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(47, 147, 201, 0.22);
+    }
+    .brand-mark {
+      width: 2.18rem; height: 2.18rem; border-radius: 0.65rem;
+      display: grid; place-items: center;
+      font-family: "Space Grotesk", sans-serif; font-size: 0.84rem; font-weight: 800;
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(145deg, rgba(88, 184, 232, 0.26), rgba(127, 227, 196, 0.16));
+      box-shadow: 0 8px 24px rgba(47, 147, 201, 0.2);
+    }
+    .brand-stack { display: grid; gap: 0.02rem; line-height: 1.05; }
+    .brand-text {
+      font-weight: 800; letter-spacing: 0.012em; color: var(--text);
+      background: linear-gradient(92deg, color-mix(in srgb, var(--text), white 8%), color-mix(in srgb, var(--primary), var(--accent) 48%));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 14px rgba(47, 147, 201, 0.18);
+    }
+    .brand-sub {
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+
+    .nav-links {
+      list-style: none; display: flex; align-items: center;
+      gap: 1.2rem; padding: 0; margin: 0;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted);
+      font-weight: 600; font-size: 0.94rem; transition: color 180ms ease;
+    }
+    .nav-links a:hover, .nav-links a[aria-current="true"] { color: var(--text); }
+
+    .theme-toggle {
+      border: 1px solid var(--line); background: var(--surface); color: var(--text);
+      border-radius: 999px; padding: 0.48rem 0.78rem;
+      font-family: inherit; font-size: 0.84rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 0.48rem; cursor: pointer;
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+    .theme-toggle:hover { border-color: var(--line-strong); transform: translateY(-1px); }
+    .theme-icon {
+      width: 1rem; height: 1rem; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+    }
+
+    .hero {
+      padding-top: 6rem; display: grid;
+      grid-template-columns: 1.35fr 0.85fr; gap: 2.2rem; align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.7rem; text-transform: uppercase; font-size: 0.75rem;
+      letter-spacing: 0.17em; color: var(--text-muted); font-weight: 700;
+    }
+
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.15; margin: 0; }
+    h1 { font-size: clamp(2rem, 4.6vw, 3.35rem); max-width: 18ch; }
+    h2 { font-size: clamp(1.6rem, 2.6vw, 2.35rem); }
+    h3 { font-size: 1.06rem; }
+
+    .hero-text { margin: 1.2rem 0 1.4rem; max-width: 64ch; color: var(--text-muted); }
+
+    .metric-row { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-bottom: 1.5rem; }
+    .metric {
+      border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+      padding: 0.38rem 0.78rem; font-size: 0.82rem; font-weight: 700; color: var(--text-muted);
+    }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.68rem; }
+    .btn {
+      text-decoration: none; border-radius: 0.75rem; padding: 0.65rem 1rem;
+      font-size: 0.92rem; font-weight: 700; border: 1px solid transparent;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(130deg, var(--primary), var(--accent));
+      color: #071620; box-shadow: 0 14px 30px rgba(47, 147, 201, 0.3);
+    }
+    .btn-secondary {
+      border-color: var(--line-strong);
+      background: color-mix(in srgb, var(--surface-strong), transparent 4%);
+    }
+    .btn-ghost { border-color: var(--line); color: var(--text-muted); }
+
+    .hero-visual { display: grid; gap: 1rem; justify-items: center; }
+    .profile-ring {
+      width: clamp(180px, 30vw, 235px); aspect-ratio: 1 / 1; border-radius: 50%;
+      padding: 8px;
+      background: linear-gradient(145deg, rgba(88, 184, 232, 0.8), rgba(127, 227, 196, 0.24));
+      box-shadow: var(--shadow);
+    }
+    .profile-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+    .profile-monogram {
+      width: 100%; height: 100%; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--bg-soft);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 800; letter-spacing: 0.04em;
+      color: var(--primary);
+    }
+    .profile-note {
+      padding: 0.9rem 1rem; border: 1px solid var(--line); background: var(--surface);
+      border-radius: 0.9rem; max-width: 290px; font-size: 0.88rem; color: var(--text-muted);
+    }
+    .profile-note p { margin: 0; }
+
+    .section-head { margin-bottom: 1.7rem; }
+    .section-head h2 { max-width: 24ch; }
+
+    .about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+    .about-grid p { margin: 0; color: var(--text-muted); }
+
+    .strength-list {
+      margin: 1.5rem 0 0; padding: 0; list-style: none;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem;
+    }
+    .strength-list li {
+      border: 1px solid var(--line); border-radius: 0.8rem; background: var(--surface);
+      padding: 0.8rem 0.9rem; color: var(--text-muted); font-size: 0.94rem;
+    }
+
+    .timeline { position: relative; margin-top: 1rem; }
+    .timeline::before {
+      content: ""; position: absolute; left: 0.95rem; top: 0.4rem; bottom: 0.4rem;
+      width: 2px; background: linear-gradient(var(--line), transparent 96%);
+    }
+    .timeline-item {
+      position: relative; margin-left: 2.25rem; margin-bottom: 0.9rem;
+      border: 1px solid var(--line); border-radius: 1rem;
+      background: var(--surface); box-shadow: var(--shadow);
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+      content: ""; position: absolute; width: 0.75rem; height: 0.75rem; border-radius: 50%;
+      left: -1.72rem; margin-top: 1.25rem;
+      background: linear-gradient(140deg, var(--primary), var(--accent));
+      border: 2px solid color-mix(in srgb, var(--bg), white 12%);
+    }
+    .timeline-toggle {
+      width: 100%; border: 0; background: none; color: inherit;
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 1rem; padding: 1rem 1.1rem; text-align: left;
+      font-family: inherit; font-size: 1rem; cursor: pointer;
+    }
+    .timeline-toggle > span { display: grid; gap: 0.18rem; }
+    .timeline-toggle strong { font-size: 1rem; }
+    .timeline-toggle span span { color: var(--text-muted); font-size: 0.9rem; }
+    .timeline-meta {
+      font-size: 0.8rem; color: var(--text-muted); border: 1px solid var(--line);
+      border-radius: 999px; padding: 0.24rem 0.5rem; white-space: nowrap;
+    }
+    .timeline-panel { max-height: 0; overflow: hidden; transition: max-height 260ms ease; }
+    .timeline-panel ul { margin: 0; padding: 0 1.1rem 1rem 2.1rem; color: var(--text-muted); }
+    .timeline-panel li { margin-bottom: 0.45rem; }
+    .timeline-panel .stack {
+      margin: 0; padding: 0 1.1rem 1.05rem 2.1rem;
+      font-size: 0.82rem; font-weight: 700; color: var(--accent);
+    }
+    .timeline-panel.is-open { max-height: 520px; }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .card {
+      border: 1px solid var(--line); border-radius: 1rem;
+      background: linear-gradient(160deg, var(--surface), color-mix(in srgb, var(--surface-strong), transparent 10%));
+      padding: 1.1rem; transition: transform 220ms ease, border-color 220ms ease;
+    }
+    .card:hover { transform: translateY(-5px); border-color: var(--line-strong); }
+    .card p { margin: 0.6rem 0 0; color: var(--text-muted); }
+    .card-metric { margin-top: 0.8rem; font-size: 0.88rem; color: var(--accent); font-weight: 700; }
+
+    .skill-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .skill-group {
+      border: 1px solid var(--line); border-radius: 1rem;
+      background: var(--surface); padding: 1rem;
+    }
+    .tag-wrap { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.52rem; }
+    .tag-wrap span {
+      border: 1px solid var(--line); border-radius: 999px; font-size: 0.8rem;
+      color: var(--text-muted); font-weight: 700; padding: 0.3rem 0.65rem;
+    }
+
+    .credential-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .credential-card {
+      border: 1px solid var(--line); border-radius: 1rem;
+      background: var(--surface); padding: 1.05rem;
+    }
+    .credential-card ul {
+      margin: 0.75rem 0 0; padding-left: 1.15rem;
+      color: var(--text-muted); font-size: 0.92rem;
+    }
+    .credential-card li { margin-bottom: 0.4rem; }
+
+    .contact-shell {
+      border: 1px solid var(--line); border-radius: 1rem; background: var(--surface);
+      padding: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.85rem 1.6rem;
+    }
+    .contact-shell a, .contact-shell span {
+      text-decoration: none; font-weight: 700; color: var(--text);
+    }
+    .contact-shell a:hover { color: var(--primary); }
+
+    .site-footer {
+      border-top: 1px solid var(--line); padding: 1.3rem 0 1.6rem;
+      color: var(--text-muted); font-size: 0.82rem;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 960px) {
+      .hero, .about-grid, .strength-list, .cards-grid, .skill-groups, .credential-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 5.2rem; }
+      .section-head h2 { max-width: 100%; }
+    }
+
+    @media (max-width: 760px) {
+      .brand-text { font-size: 1.02rem; }
+      .brand-sub { display: none; }
+      .nav-shell { flex-wrap: wrap; row-gap: 0.45rem; }
+      .nav-links { width: 100%; order: 3; overflow-x: auto; gap: 0.9rem; padding-bottom: 0.2rem; }
+      .theme-toggle { margin-left: auto; }
+      .timeline-toggle { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media print {
+      body { background: #fff; color: #000; }
+      .site-header, .theme-toggle, .cta-row, .bg-orb, .site-footer { display: none !important; }
+      .section { padding: 1rem 0; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .timeline-panel { max-height: none !important; overflow: visible !important; }
+      .card, .skill-group, .timeline-item, .strength-list li, .credential-card { box-shadow: none; }
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased p-6 sm:p-12">
-    <div class="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-xl shadow-md border border-slate-100">
-        
-        <!-- Header Section -->
-        <header class="border-b border-slate-200 pb-6 text-center sm:text-left">
-            <h1 class="text-4xl font-bold tracking-tight text-slate-900">YOUR NAME</h1>
-            <p class="text-xl text-indigo-600 font-medium mt-1">Target Job Title / Profession</p>
-            <div class="mt-4 text-sm text-slate-600 flex flex-wrap justify-center sm:justify-start gap-4">
-                <span>📍 City, State</span>
-                <span>📞 (571) 456-7890</span>
-                <span>✉️ email@example.com</span>
-                <a href="#" class="text-indigo-600 hover:underline">LinkedIn</a>
-                <a href="#" class="text-indigo-600 hover:underline">GitHub</a>
-            </div>
-        </header>
+<body data-theme="dark">
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
 
-        <!-- Professional Summary -->
-        <section class="mt-8">
-            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">Professional Summary</h2>
-            <p class="mt-3 text-slate-600 leading-relaxed">
-                Results-driven professional with experience building scalable solutions and optimizing system workflows. Adept at leveraging modern frameworks, tracking performance metrics, and collaborating across teams to solve complex problems.
-            </p>
-        </section>
+  <header class="site-header" id="top">
+    <nav class="container nav-shell" aria-label="Primary navigation">
+      <a href="#top" class="brand" aria-label="Go to top">
+        <span class="brand-mark">SR</span>
+        <span class="brand-stack">
+          <span class="brand-text">Sourabh</span>
+          <span class="brand-sub">Solution Architect</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#journey">Experience</a></li>
+        <li><a href="#projects">Highlights</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-live="polite">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Light mode</span>
+      </button>
+    </nav>
+  </header>
 
-        <!-- Technical Skills -->
-        <section class="mt-8">
-            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">Technical Skills</h2>
-            <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <div><span class="font-semibold text-slate-700">Languages:</span> Python, JavaScript, SQL, HTML/CSS</div>
-                <div><span class="font-semibold text-slate-700">Tools & Frameworks:</span> React, Node.js, Git, Docker, AWS</div>
-            </div>
-        </section>
+  <main>
+    <section class="hero section container reveal is-visible" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Solution Architect &middot; Telecom BSS</p>
+        <h1>Turning marketing intent into catalogs that launch offers faster.</h1>
+        <p class="hero-text">
+          I architect product catalog and BSS solutions for tier-1 communication service providers. Twenty years across catalog,
+          billing and ordering &mdash; today as Solution Architect for Amdocs CatalogONE at Verizon, previously as Product Owner
+          of the CatalogONE product itself. I work end to end: customer-facing solution design, TM Forum-aligned data models,
+          and hands-on depth in the cloud-native stack the platform runs on.
+        </p>
+        <div class="metric-row" aria-label="Key career metrics">
+          <span class="metric">20 years in telecom BSS</span>
+          <span class="metric">15 years onsite across 4 countries</span>
+          <span class="metric">Verizon &amp; Vodafone scale</span>
+          <span class="metric">TM Forum-aligned catalog</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Contact</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn btn-ghost" href="mailto:sourabhr@amdocs.com">Email</a>
+        </div>
+      </div>
 
-        <!-- Professional Experience -->
-        <section class="mt-8">
-            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">Professional Experience</h2>
-            
-            <div class="mt-4">
-                <div class="flex justify-between items-start flex-wrap gap-1">
-                    <h3 class="font-bold text-lg text-slate-800">Job Title / Role</h3>
-                    <span class="text-sm font-medium text-slate-500">Jan 2024 – Present</span>
-                </div>
-                <p class="text-sm text-indigo-600 font-medium">Company Name — City, State</p>
-                <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1 text-sm pl-2">
-                    <li>Developed core application modules, increasing processing efficiency by 25%.</li>
-                    <li>Collaborated with cross-functional teams to deploy user-facing web updates.</li>
-                </ul>
-            </div>
-        </section>
+      <aside class="hero-visual" aria-label="Profile">
+        <div class="profile-ring">
+          <!-- Drop a photo named profile.jpg next to this file and swap the div below for:
+               <img src="profile.jpg" alt="Sourabh"> -->
+          <div class="profile-monogram" aria-hidden="true">SR</div>
+        </div>
+        <div class="profile-note">
+          <p>Catalog, billing and ordering architecture for mobile, fixed, TV and internet portfolios &mdash; delivered from Germany, the Netherlands, Cyprus and the USA.</p>
+        </div>
+      </aside>
+    </section>
 
+    <section class="section container reveal" id="about">
+      <div class="section-head">
+        <p class="eyebrow">About</p>
+        <h2>Architecture that speaks both business and system</h2>
+      </div>
+      <div class="about-grid">
+        <p>
+          Product catalog is where commercial strategy meets system reality. I sit in that gap: translating what marketing wants
+          to sell into offers, products, services, pricing and rules that billing, ordering and charging can actually execute &mdash;
+          then defending that model through design reviews, migrations and production.
+        </p>
+        <p>
+          My background is deliberately hybrid. I came up writing Java conversion and reconciliation tooling for billing migrations,
+          moved through business analysis and design, owned the CatalogONE product backlog for five years, and now architect it for a
+          North American tier-1. That lets me hold a customer conversation and a code-level design discussion in the same meeting.
+        </p>
+      </div>
+      <ul class="strength-list" aria-label="Core strengths">
+        <li>Catalog architecture and data modeling on TM Forum standards</li>
+        <li>Legacy-to-Amdocs catalog and billing transformation at scale</li>
+        <li>Cloud-native product context: microservices, React, Kubernetes, Kafka</li>
+        <li>Product ownership and SAFe release planning across scrum teams</li>
+        <li>Customer-facing scoping, solution design and process setup</li>
+        <li>Production support, SLA ownership and continuous improvement</li>
+      </ul>
+    </section>
+
+    <section class="section container reveal" id="journey">
+      <div class="section-head">
+        <p class="eyebrow">Experience</p>
+        <h2>Two decades across catalog, billing and ordering</h2>
+      </div>
+
+      <div class="timeline" role="list">
+        <article class="timeline-item" role="listitem">
+          <button class="timeline-toggle" type="button" aria-expanded="true">
+            <span>
+              <strong>Amdocs &mdash; Solution Architect</strong>
+              <span>Amdocs CatalogONE for Verizon &middot; USA</span>
+            </span>
+            <span class="timeline-meta">Aug 2023 &ndash; Present</span>
+          </button>
+          <div class="timeline-panel is-open">
+            <ul>
+              <li>Own the architecture and solution design for CatalogONE at Verizon, translating portfolio requirements into catalog models the BSS stack can execute.</li>
+              <li>Run customer-facing architecture sessions with product managers, architects and business stakeholders to align roadmap with platform capability.</li>
+              <li>Drive release readiness, upgrade planning and continuous production improvement on a live tier-1 catalog.</li>
+              <li>Build proofs of concept and support pre-sales, converting product capability into concrete customer solutions.</li>
+            </ul>
+            <p class="stack">Microservices &middot; React &middot; Redux &middot; Docker &middot; Kubernetes &middot; Kafka &middot; TM Forum Open APIs</p>
+          </div>
+        </article>
+
+        <article class="timeline-item" role="listitem">
+          <button class="timeline-toggle" type="button" aria-expanded="false">
+            <span>
+              <strong>Amdocs &mdash; Product Owner</strong>
+              <span>Amdocs CatalogONE product &middot; Cyprus</span>
+            </span>
+            <span class="timeline-meta">Apr 2018 &ndash; Aug 2023</span>
+          </button>
+          <div class="timeline-panel">
+            <ul>
+              <li>Owned and prioritized the CatalogONE program backlog, converting business and technical needs into features and user stories with clear acceptance criteria.</li>
+              <li>Facilitated release planning, sprint planning and retrospectives across scrum teams; balanced customer commitments against product strategy.</li>
+              <li>Shaped the product's evolution toward a cloud-native, microservices-based catalog serving both IT implementation teams and marketers.</li>
+              <li>Acted as the bridge between field accounts and R&amp;D, turning recurring customer pain into productized capability.</li>
+            </ul>
+            <p class="stack">SAFe &middot; Backlog ownership &middot; Release planning &middot; Product strategy</p>
+          </div>
+        </article>
+
+        <article class="timeline-item" role="listitem">
+          <button class="timeline-toggle" type="button" aria-expanded="false">
+            <span>
+              <strong>Amdocs &mdash; Business Analysis Specialist</strong>
+              <span>VodafoneZiggo merger programs &middot; Netherlands</span>
+            </span>
+            <span class="timeline-meta">Oct 2016 &ndash; Apr 2018</span>
+          </button>
+          <div class="timeline-panel">
+            <ul>
+              <li>Designer for the Product &amp; Customer Model stream across B2B and B2C during the Vodafone&ndash;Ziggo merger, owning end-to-end cross-domain solutions.</li>
+              <li>Defined household benefit eligibility and ruling in the BSS domain using EPC, working with the BI team on the data inputs driving address-based matching.</li>
+              <li>Led the Unify program's catalog design for consumer, prepaid and enterprise, covering migration, scoping, interface alignment and HLD reviews.</li>
+            </ul>
+            <p class="stack">EPC &middot; Amdocs Data Hub &middot; Cross-domain design &middot; Migration</p>
+          </div>
+        </article>
+
+        <article class="timeline-item" role="listitem">
+          <button class="timeline-toggle" type="button" aria-expanded="false">
+            <span>
+              <strong>Amdocs &mdash; Business Analyst / Team Lead</strong>
+              <span>Vodafone NL Product Catalog Factory &middot; Netherlands</span>
+            </span>
+            <span class="timeline-meta">Jul 2013 &ndash; Oct 2016</span>
+          </button>
+          <div class="timeline-panel">
+            <ul>
+              <li>Led a 7-person managed-service team delivering production catalog implementation and testing for Vodafone Netherlands.</li>
+              <li>Gathered quarterly promotion and proposition requirements from marketing, then owned analysis, design, release planning and prioritization through to production.</li>
+              <li>Led the Multi-SIM / shared-data launch end to end across billing, ordering and network changes, including test design and result reviews.</li>
+              <li>Built Java reconciliation and validation tooling that caught configuration defects before they reached production.</li>
+            </ul>
+            <p class="stack">Java &middot; Oracle &middot; EPC &middot; Billing &amp; ordering configuration &middot; Team leadership</p>
+          </div>
+        </article>
+
+        <article class="timeline-item" role="listitem">
+          <button class="timeline-toggle" type="button" aria-expanded="false">
+            <span>
+              <strong>Amdocs &mdash; Business Analyst</strong>
+              <span>Vodafone Germany CPCOM &middot; Germany</span>
+            </span>
+            <span class="timeline-meta">Dec 2010 &ndash; Jun 2013</span>
+          </button>
+          <div class="timeline-panel">
+            <ul>
+              <li>Consolidated separate fixed-line and mobile ordering systems into one centralized platform, owning EPC and Amdocs Ordering configuration and implementation.</li>
+              <li>Converted Vodafone D2 business needs into EPC offers, products and services, with detailed design documents and solution concepts.</li>
+              <li>Helped the customer define their Product Management Life Cycle &mdash; how new requirements flow into catalog and ordering configuration.</li>
+              <li>Wrote Java loaders to hit critical data timelines and acted as cross-system troubleshooter across EPC, Ordering, Mapper and KIAS.</li>
+            </ul>
+            <p class="stack">EPC &middot; Amdocs Ordering &middot; Java &middot; Solution design</p>
+          </div>
+        </article>
+
+        <article class="timeline-item" role="listitem">
+          <button class="timeline-toggle" type="button" aria-expanded="false">
+            <span>
+              <strong>Amdocs &mdash; Business Analyst</strong>
+              <span>Billing transformation programs &middot; India</span>
+            </span>
+            <span class="timeline-meta">Nov 2006 &ndash; Dec 2010</span>
+          </button>
+          <div class="timeline-panel">
+            <ul>
+              <li>Delivered four billing migrations onto Amdocs &mdash; Convergys (Telkomsel), Leap, Infranet (TELUS Canada) and the Ensemble-to-Enabler Fusion program.</li>
+              <li>Wrote the conversion scripts and tooling that transformed legacy billing data into Amdocs EPC catalog input format.</li>
+              <li>Owned EPC billing and ordering implementation, Accounts Receivable configuration, design documentation and customer training.</li>
+              <li>Established validation-query and automated-check practice that became the team's quality gate for migrated data.</li>
+            </ul>
+            <p class="stack">EPC &middot; RLC &middot; Amdocs Billing &middot; Oracle &middot; PL/SQL &middot; Java</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="projects">
+      <div class="section-head">
+        <p class="eyebrow">Selected Highlights</p>
+        <h2>Programs where catalog decisions moved the business</h2>
+      </div>
+      <div class="cards-grid">
+        <article class="card">
+          <h3>CatalogONE at Verizon</h3>
+          <p>Architecting a cloud-native, TM Forum-aligned catalog for a North American tier-1: portfolio modeling, release support and production evolution.</p>
+          <p class="card-metric">Solution Architect &middot; live tier-1 platform</p>
+        </article>
+
+        <article class="card">
+          <h3>CatalogONE Product Ownership</h3>
+          <p>Five years owning the product backlog &mdash; features, stories and release scope for the catalog now deployed across multiple CSP accounts.</p>
+          <p class="card-metric">5 years &middot; multi-account product</p>
+        </article>
+
+        <article class="card">
+          <h3>VodafoneZiggo Merger</h3>
+          <p>Product &amp; Customer Model design across B2B and B2C, plus benefit eligibility ruling in BSS driven by combined-repository data matching.</p>
+          <p class="card-metric">Cross-domain design lead</p>
+        </article>
+
+        <article class="card">
+          <h3>Product Catalog Factory</h3>
+          <p>Stood up and led a managed catalog-delivery service for Vodafone NL: recruitment, process setup, production implementation and improvement plans.</p>
+          <p class="card-metric">Team of 7 &middot; production ownership</p>
+        </article>
+
+        <article class="card">
+          <h3>Multi-SIM Shared Data Launch</h3>
+          <p>End-to-end launch of shared-bucket multi-device propositions spanning billing, ordering and network, with Java-based data reconciliation for quality.</p>
+          <p class="card-metric">E2E owner &middot; commercial launch</p>
+        </article>
+
+        <article class="card">
+          <h3>Legacy Billing Migrations</h3>
+          <p>Convergys, Leap, Infranet and Ensemble estates converted into Amdocs billing and EPC catalog structures with automated validation gates.</p>
+          <p class="card-metric">4 migration programs</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="skills">
+      <div class="section-head">
+        <p class="eyebrow">Skills</p>
+        <h2>Domain depth with a working engineer's toolkit</h2>
+      </div>
+
+      <div class="skill-groups">
+        <article class="skill-group">
+          <h3>Catalog &amp; BSS Products</h3>
+          <div class="tag-wrap">
+            <span>Amdocs CatalogONE</span><span>EPC 9.0</span><span>TM Forum SID</span><span>TM Forum Open APIs</span><span>Amdocs Billing</span><span>Amdocs Ordering / OMS</span><span>CES</span><span>Charging</span><span>Accounts Receivable</span><span>Collections</span>
+          </div>
+        </article>
+        <article class="skill-group">
+          <h3>Architecture &amp; Cloud-Native</h3>
+          <div class="tag-wrap">
+            <span>Microservices</span><span>REST APIs</span><span>Kafka</span><span>Docker</span><span>Kubernetes</span><span>Event-driven design</span><span>System integration</span><span>AWS</span>
+          </div>
+        </article>
+        <article class="skill-group">
+          <h3>Engineering</h3>
+          <div class="tag-wrap">
+            <span>Java</span><span>J2EE</span><span>React</span><span>Redux</span><span>JavaScript</span><span>Servlets / JSP</span><span>EJB</span><span>Oracle</span><span>PL/SQL</span><span>Big Data / Hadoop</span>
+          </div>
+        </article>
+        <article class="skill-group">
+          <h3>Delivery &amp; Leadership</h3>
+          <div class="tag-wrap">
+            <span>Solution design</span><span>Requirement analysis</span><span>SAFe</span><span>Agile / Scrum</span><span>Release planning</span><span>Product ownership</span><span>JIRA</span><span>DevOps</span><span>Team leadership</span><span>Customer-facing delivery</span>
+          </div>
+        </article>
+        <article class="skill-group">
+          <h3>AI-Assisted Delivery</h3>
+          <div class="tag-wrap">
+            <span>Prompt engineering</span><span>Agentic AI</span><span>AI-assisted analysis</span><span>Cursor</span>
+          </div>
+        </article>
+        <article class="skill-group">
+          <h3>Industry Domains</h3>
+          <div class="tag-wrap">
+            <span>Mobile</span><span>Fixed line</span><span>TV</span><span>Internet</span><span>Prepaid &amp; postpaid</span><span>B2B &amp; B2C</span><span>Convergent portfolios</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="credentials">
+      <div class="section-head">
+        <p class="eyebrow">Credentials</p>
+        <h2>Certifications, education and recognition</h2>
+      </div>
+      <div class="credential-grid">
+        <article class="credential-card">
+          <h3>Certifications</h3>
+          <ul>
+            <li>Certified SAFe&reg; 5 Product Owner / Product Manager</li>
+            <li>AWS Certified Cloud Practitioner</li>
+            <li>CP-DOF &mdash; Certified Professional, DevOps Foundation</li>
+            <li>Amdocs Product Catalog Implementation certification &mdash; 92%</li>
+          </ul>
+        </article>
+        <article class="credential-card">
+          <h3>Education</h3>
+          <ul>
+            <li>Master of Computer Application &mdash; Sahara Arts &amp; Management Academy, Lucknow</li>
+            <li>Bachelor of Science, Computer Science &mdash; Lucknow University</li>
+          </ul>
+        </article>
+        <article class="credential-card">
+          <h3>Recognition</h3>
+          <ul>
+            <li>VodafoneZiggo Quarterly Hero &mdash; Netherlands, 2017</li>
+            <li>Employee of the Quarter &mdash; Cyprus</li>
+            <li>Certificate of Excellence for outstanding contribution to business success</li>
+            <li>Multiple performance bonuses across the Vodafone NL, Telkomsel and EPC delivery lines</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container reveal" id="contact">
+      <div class="section-head">
+        <p class="eyebrow">Contact</p>
+        <h2>Open to solution architecture and catalog transformation conversations</h2>
+      </div>
+      <div class="contact-shell">
+        <a href="mailto:sourabhr@amdocs.com">sourabhr@amdocs.com</a>
+        <a href="tel:+15716859889">+1 571-685-9889</a>
+        <span>Ashburn, VA, USA</span>
+        <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year">2026</span> Sourabh &middot; Solution Architect, Telecom BSS</p>
     </div>
+  </footer>
+
+  <script>
+    const THEME_KEY = "sr-site-theme";
+
+    const body = document.body;
+    const header = document.querySelector(".site-header");
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeLabel = themeToggle?.querySelector(".theme-label");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const sectionNodes = document.querySelectorAll("main section[id]");
+    const revealNodes = document.querySelectorAll(".reveal");
+    const timelineToggles = document.querySelectorAll(".timeline-toggle");
+    const yearEl = document.getElementById("year");
+
+    function setTheme(theme) {
+      body.dataset.theme = theme;
+      localStorage.setItem(THEME_KEY, theme);
+
+      const isDark = theme === "dark";
+      if (themeLabel) {
+        themeLabel.textContent = isDark ? "Light mode" : "Dark mode";
+      }
+      themeToggle?.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+    }
+
+    function initTheme() {
+      const storedTheme = localStorage.getItem(THEME_KEY);
+      setTheme(storedTheme === "light" ? "light" : "dark");
+    }
+
+    function initThemeToggle() {
+      themeToggle?.addEventListener("click", () => {
+        setTheme(body.dataset.theme === "dark" ? "light" : "dark");
+      });
+    }
+
+    function initHeaderState() {
+      const updateHeader = () => {
+        header?.classList.toggle("scrolled", window.scrollY > 12);
+      };
+      updateHeader();
+      window.addEventListener("scroll", updateHeader, { passive: true });
+    }
+
+    function initSmoothScroll() {
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const id = link.getAttribute("href");
+          if (!id?.startsWith("#")) return;
+
+          const target = document.querySelector(id);
+          if (!target) return;
+
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    }
+
+    function initActiveSectionHighlight() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const activeId = entry.target.id;
+            navLinks.forEach((link) => {
+              link.setAttribute("aria-current", String(link.getAttribute("href") === `#${activeId}`));
+            });
+          });
+        },
+        { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 }
+      );
+
+      sectionNodes.forEach((section) => observer.observe(section));
+    }
+
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.08 }
+      );
+
+      revealNodes.forEach((node) => observer.observe(node));
+    }
+
+    function setPanelState(toggle, isOpen) {
+      const panel = toggle.nextElementSibling;
+      if (!panel) return;
+
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      panel.classList.toggle("is-open", isOpen);
+      panel.style.maxHeight = isOpen ? `${panel.scrollHeight}px` : "0px";
+    }
+
+    function initTimelineAccordions() {
+      timelineToggles.forEach((toggle, index) => {
+        setPanelState(toggle, index === 0);
+
+        toggle.addEventListener("click", () => {
+          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+          timelineToggles.forEach((node) => setPanelState(node, false));
+          setPanelState(toggle, !isOpen);
+        });
+      });
+    }
+
+    function initYear() {
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    }
+
+    initTheme();
+    initThemeToggle();
+    initHeaderState();
+    initSmoothScroll();
+    initActiveSectionHighlight();
+    initRevealAnimations();
+    initTimelineAccordions();
+    initYear();
+  </script>
 </body>
 </html>
